@@ -32,7 +32,7 @@ Course Catalog application lets a _user_ browse different online courses, view t
 
 1. Run the backend code corresponding to this application.\
    (Contact your program's Point of Contact from the upGrad team to get the backend code.)
-2. Clone the [repository](https://github.com/srishti/edtech-frontend)\* using Git on your machine. Alternatively, download the `.zip` file of current repository on your machine and then unzip the downloaded zipped file.
+2. Clone the [repository](https://github.com/srishti/course-catalog-frontend)\* using Git on your machine. Alternatively, download the `.zip` file of current repository on your machine and then unzip the downloaded zipped file.
 3. Go inside the application's directory on your local machine.
 4. Install all packages using the following command:\
    `npm i`
@@ -159,7 +159,7 @@ _\*Admin already exists in the corresponding backend code of this application wi
 
 ## Bonus Features
 
-- **Responsive Application**\
+- **Responsiveness**\
    The entire application is responsive to devices of varied dimensions.
 
 - **Loader**\
@@ -171,16 +171,16 @@ _\*Admin already exists in the corresponding backend code of this application wi
 - **Client-side Form Validation**\
    Wherever there's an input field inside a form accepting inputs from the user/admin, the entered input is validated on the client-side against the validation rules defined in the application. For example, some fields are required to be mandatorily filled in, an email must be in the proper format, the password must meet the defined criteria, the pincode/phone number must be numerical and of certain length, the video URL of a course should be a valid YouTube URL, etc.
 
+- **Client-Side Data Persistence**\
+  The login details of a user/admin is persisted in the client-side until the user/admin logs out from the application or the browser's local storage is cleared. This helps a user/admin to smoothly navigate to different pages in application as well as view the application even after the window or tab is closed, thereby, not requiring the user/admin to login each time the application is viewed.
+
+  For similar reasons, the selected course and address of a user are also persisted in the application.
+
 - **Protected Routes**\
   The authenticated routes are protected on the client-side. This implies that a _user_ will not be able to view the authenticated routes of _admin_ ([course list](#course-list) page, [add course](#add-course) page and [edit course](#edit-course) page) . Similarly, an _admin_ will not be able to view the authenticated routes of a _user_ ([home](#home) page, [course details](#course-details) page, [checkout](#checkout) page, [summary](#summary) page). If the URL is known to an unauthorized user and they try to enter the restricted URL, they will be redirected to the [onboard](#onboard) page where they will have an option to either sign up as a _user_ or log in as a _user/admin_.
 
 - **[404] Page Not Found**\
   If a user/admin tries to access a route which does not match any of the defined routes in the application, they will be taken to a '404: Not Found' page where they will be notified that the entered URL does not exist in the application.
-
-- **Client-Side Data Persistence**\
-  The login details of a user/admin is persisted in the client-side until the user/admin logs out from the application or the browser's local storage is cleared. This helps a user/admin to smoothly navigate to different pages in application as well as view the application even after the window or tab is closed, thereby, not requiring the user/admin to login each time the application is viewed.
-
-  For similar reasons, the selected course and address of a user are also persisted in the application.
 
 ## Bootstrapping
 
