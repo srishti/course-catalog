@@ -47,7 +47,8 @@ export const AuthProvider = ({ children }) => {
 
   // Function to get the role of logged-in user
   const getLoggedInUserRole = () => {
-    return getLoggedInUserDetails().role;
+    const userDetails = getLoggedInUserDetails();
+    return userDetails && userDetails.role;
   };
 
   // Function to call login API and pass success and failure callbacks to it
@@ -155,6 +156,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     isLoggedIn,
     getLoggedInUserDetails,
+    getLoggedInUserRole,
     tabValue,
     handleTabChange,
   };

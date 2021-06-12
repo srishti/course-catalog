@@ -30,19 +30,21 @@ const Routes = () => {
             path={routeConstants.ROUTE_URL.ONBOARD}
             component={OnboardPage}
           ></Route>
-          <Route
+          <ProtectedRoute
             exact
             path={[
               routeConstants.ROUTE_URL.HOME,
               routeConstants.ROUTE_URL.ROOT,
             ]}
             component={HomePage}
-          ></Route>
-          <Route
+            role={authConstants.ROLE.USER}
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.DETAILS}
             component={DetailsPage}
-          ></Route>
+            role={authConstants.ROLE.USER}
+          ></ProtectedRoute>
           <ProtectedRoute
             exact
             path={routeConstants.ROUTE_URL.CHECKOUT}
