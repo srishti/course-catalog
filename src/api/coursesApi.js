@@ -1,5 +1,5 @@
 // imports for utils
-import { utilsApi, apiConstants } from "./utils-api";
+import { apiUtils, apiConstants } from "./api-utils";
 
 /**
  * Function to search for a course
@@ -14,7 +14,7 @@ export async function searchCourseByTitle(
   failureCallback
 ) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       null,
@@ -44,7 +44,7 @@ export async function getCoursesByCategory(
   failureCallback
 ) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORY],
@@ -69,7 +69,7 @@ export async function getCoursesByCategory(
  */
 export async function getAllCourses(successCallback, failureCallback) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       null,
@@ -94,7 +94,7 @@ export async function getAllCourses(successCallback, failureCallback) {
  */
 export async function getAllPublishedCourses(successCallback, failureCallback) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [apiConstants.COURSES_API_PATH_PARAMETER.PUBLISHED],
@@ -124,7 +124,7 @@ export async function getCourseById(
   failureCallback
 ) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [courseId],
@@ -149,7 +149,7 @@ export async function getCourseById(
  */
 export async function deleteCourse(courseId, successCallback, failureCallback) {
   try {
-    await utilsApi.sendApiRequest(
+    await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.DELETE,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [courseId],

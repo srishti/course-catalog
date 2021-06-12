@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import * as apiConstants from "./utils-api/apiConstants";
+import * as apiConstants from "./api-utils/apiConstants";
 
 const axiosInstance = axios.create({
   baseURL: apiConstants.BASE_URL,
