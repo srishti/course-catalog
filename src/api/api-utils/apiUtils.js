@@ -1,4 +1,11 @@
+// import for axios instance
 import axios from "../axiosConfig";
+
+// imports for utils
+import * as utils from "../../utils";
+
+// imports for constants
+import * as apiConstants from "./apiConstants";
 
 /**
  * Function to build string from path parameters
@@ -36,6 +43,26 @@ const buildUrlWithUrlParameters = (urlParameters) => {
     urlParametersString = "?" + urlParametersString;
     return urlParametersString;
   }
+};
+
+/**
+ * Function to get the user token from local storage
+ * @returns {String} user token
+ */
+const getUserToken = () => {
+  const userDetails = utils.getFromLocalStorage(
+    utils.constants.LOCAL_STORAGE_KEY.USER
+  );
+  return userDetails ? userDetails.token : null;
+};
+
+export const getRequestHeaderWithToken = () => {
+  let requestHeader = {};
+  const token = getUserToken();
+  if (token) {
+    requestHeader[apiConstants.REQUEST_HEADER_KEY.ACCESS_TOKEN] = token;
+  }
+  return requestHeader;
 };
 
 /**

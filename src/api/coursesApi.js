@@ -20,7 +20,7 @@ export async function searchCourseByTitle(
       null,
       { title: title },
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );
@@ -50,7 +50,7 @@ export async function getCoursesByCategory(
       [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORY],
       { category: category },
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );
@@ -75,7 +75,7 @@ export async function getAllCourses(successCallback, failureCallback) {
       null,
       null,
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );
@@ -100,7 +100,7 @@ export async function getAllPublishedCourses(successCallback, failureCallback) {
       [apiConstants.COURSES_API_PATH_PARAMETER.PUBLISHED],
       null,
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );
@@ -130,7 +130,7 @@ export async function getCourseById(
       [courseId],
       null,
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );
@@ -155,7 +155,7 @@ export async function deleteCourse(courseId, successCallback, failureCallback) {
       [courseId],
       null,
       null,
-      null,
+      apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback
     );

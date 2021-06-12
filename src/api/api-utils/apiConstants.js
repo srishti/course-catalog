@@ -10,6 +10,7 @@ export const HTTP_METHOD = {
 export const REQUEST_HEADER_KEY = {
   CONTENT_TYPE: "Content-Type",
   CACHE_CONTROL: "cache-control",
+  ACCESS_TOKEN: "x-access-token",
 };
 
 export const REQUEST_HEADER_VALUE = {

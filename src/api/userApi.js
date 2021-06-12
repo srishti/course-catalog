@@ -27,7 +27,7 @@ export async function doLogin(
         null,
         null,
         userData,
-        null,
+        apiUtils.getRequestHeaderWithToken(),
         successCallback,
         failureCallback
       );
@@ -100,7 +100,7 @@ export async function doLogout(userId, successCallback, failureCallback) {
         null,
         null,
         userData,
-        null,
+        apiUtils.getRequestHeaderWithToken(),
         successCallback,
         failureCallback
       );

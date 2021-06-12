@@ -35,7 +35,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
           if (isLoggedIn && getLoggedInUserRole() === authConstants.ROLE.USER) {
             return <Component {...props} />;
           } else if (isLoggedIn) {
-            console.log(history);
             // if some user is logged in but the role is not USER, redirect back to where the user came from
             return history.goBack();
           } else {
