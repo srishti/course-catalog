@@ -1,18 +1,18 @@
 import React, { Fragment } from "react";
 
 // imports for MUI components
-import { MuiTabs } from "../../components/MUI/MuiTabs";
+import { MuiTabs } from "../../../components/MUI/MuiTabs";
 
 // imports for custom components
 import { LoginForm, SignupForm } from "./forms";
 
 // imports for custom hooks
-import useLoader from "../../hooks/useLoader";
-import useNotification from "../../hooks/useNotification";
-import { useAuth } from "../../contexts/auth";
+import useLoader from "../../../hooks/useLoader";
+import useNotification from "../../../hooks/useNotification";
+import { useAuth } from "../../../contexts/auth";
 
 // imports for assets
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 
 // imports for styles
 import { useStyles } from "./styles.js";

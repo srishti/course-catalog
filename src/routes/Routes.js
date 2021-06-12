@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // imports for custom components
-import { OnboardPage } from "../pages/onboard";
+import { OnboardPage } from "../pages/common/onboard";
 import { HomePage } from "../pages/user/home";
 import { DetailsPage } from "../pages/user/details";
 import { CheckoutPage } from "../pages/user/checkout";
@@ -10,7 +10,7 @@ import { SummaryPage } from "../pages/user/summary";
 import { ListPage } from "../pages/admin/list";
 import { AddPage } from "../pages/admin/add";
 import { EditPage } from "../pages/admin/edit";
-import { NotFoundPage } from "../pages/notfound";
+import { NotFoundPage } from "../pages/common/notfound";
 
 // imports for contexts
 import { AuthProvider, authConstants } from "../contexts/auth";

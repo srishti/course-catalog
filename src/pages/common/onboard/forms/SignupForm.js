@@ -14,11 +14,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
 
 // imports for custom hook
-import { useForm } from "../../../hooks";
+import { useForm } from "../../../../hooks";
 import validateSignupForm from "./validateSignupForm";
 
 // imports for styles
-import { useStyles } from "../../../styles/formStyles.js";
+import { useStyles } from "../../../../styles/formStyles";
 
 const SignupForm = ({ successHandler }) => {
   const initialFormValues = {
