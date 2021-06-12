@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -62,8 +62,6 @@ const CheckoutPage = () => {
     false // determining if values of form control should be cleared
   );
 
-  const { flatOrBuilding, street, city, state, country, pin, phone } = values;
-
   // get details of course selected by currently logged-in user
   const courseDetails = utils.getFromLocalStorage(
     utils.constants.LOCAL_STORAGE_KEY.COURSE
@@ -74,7 +72,7 @@ const CheckoutPage = () => {
       <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
       <main className={cssClasses.checkoutPageContent}>
         {courseDetails ? (
-          <Fragment>
+          <>
             <Typography
               variant="inherit"
               component="h3"
@@ -100,7 +98,7 @@ const CheckoutPage = () => {
                     id="flatOrBuilding"
                     name="flatOrBuilding"
                     type="text"
-                    value={flatOrBuilding}
+                    value={values.flatOrBuilding}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -119,7 +117,7 @@ const CheckoutPage = () => {
                     id="street"
                     name="street"
                     type="text"
-                    value={street}
+                    value={values.street}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -136,7 +134,7 @@ const CheckoutPage = () => {
                     id="city"
                     name="city"
                     type="text"
-                    value={city}
+                    value={values.city}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -153,7 +151,7 @@ const CheckoutPage = () => {
                     id="state"
                     name="state"
                     type="text"
-                    value={state}
+                    value={values.state}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -170,7 +168,7 @@ const CheckoutPage = () => {
                     id="country"
                     name="country"
                     type="text"
-                    value={country}
+                    value={values.country}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -187,7 +185,7 @@ const CheckoutPage = () => {
                     id="pin"
                     name="pin"
                     type="text"
-                    value={pin}
+                    value={values.pin}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -204,7 +202,7 @@ const CheckoutPage = () => {
                     id="phone"
                     name="phone"
                     type="text"
-                    value={phone}
+                    value={values.phone}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -226,7 +224,7 @@ const CheckoutPage = () => {
                 show summary
               </Button>
             </form>
-          </Fragment>
+          </>
         ) : (
           history.push(routeConstants.ROUTE_URL.ROOT)
         )}

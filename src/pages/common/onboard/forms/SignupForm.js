@@ -35,7 +35,6 @@ const SignupForm = ({ successHandler }) => {
     validateSignupForm,
     successHandler
   );
-  const { firstName, lastName, email, password, confirmPassword } = values;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -64,7 +63,7 @@ const SignupForm = ({ successHandler }) => {
           <FilledInput
             id="signupFirstName"
             name="firstName"
-            value={firstName}
+            value={values.firstName}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"
@@ -80,7 +79,7 @@ const SignupForm = ({ successHandler }) => {
           <FilledInput
             id="signupLastName"
             name="lastName"
-            value={lastName}
+            value={values.lastName}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"
@@ -94,7 +93,7 @@ const SignupForm = ({ successHandler }) => {
             id="signupEmail"
             name="email"
             type="email"
-            value={email}
+            value={values.email}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"
@@ -109,7 +108,7 @@ const SignupForm = ({ successHandler }) => {
             id="signupPassword"
             name="password"
             type={showPassword ? "text" : "password"}
-            value={password}
+            value={values.password}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"
@@ -138,7 +137,7 @@ const SignupForm = ({ successHandler }) => {
             id="signupConfirmPassword"
             name="confirmPassword"
             type={"password"}
-            value={confirmPassword}
+            value={values.confirmPassword}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"

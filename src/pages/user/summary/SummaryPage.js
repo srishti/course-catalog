@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 // imports for utils
 import * as utils from "../../../utils";
@@ -56,7 +56,7 @@ const SummaryPage = () => {
       <MuiPrimarySearchAppBar isLogoClickable={true} isProfileVisible={true} />
       <main className={classes.summaryPageContent}>
         {courseDetails && addressDetails ? (
-          <Fragment>
+          <>
             {/* Summary Heading */}
             <Typography
               variant="inherit"
@@ -144,7 +144,7 @@ const SummaryPage = () => {
                 place order
               </Button>
             </div>
-          </Fragment>
+          </>
         ) : courseDetails ? (
           history.push(routeConstants.ROUTE_URL.CHECKOUT)
         ) : (

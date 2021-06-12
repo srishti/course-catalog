@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
@@ -101,7 +101,7 @@ const EditPage = (props) => {
         {isLoading ? (
           loader
         ) : (
-          <Fragment>
+          <>
             <Button
               variant="contained"
               className={classes.backButton}
@@ -362,7 +362,7 @@ const EditPage = (props) => {
                 Edit
               </Button>
             </form>
-          </Fragment>
+          </>
         )}
         {notification}
       </main>

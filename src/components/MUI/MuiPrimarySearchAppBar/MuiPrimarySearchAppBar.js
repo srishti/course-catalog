@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 
 // imports for 3rd party libraries
 import { Link, useHistory } from "react-router-dom";
@@ -182,7 +182,7 @@ const MuiPrimarySearchAppBar = ({
   );
 
   return (
-    <Fragment>
+    <>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           {/* upGrad Logo */}
@@ -241,7 +241,7 @@ const MuiPrimarySearchAppBar = ({
 
           {/* Profile Menu - large screens (desktop) */}
           {isProfileVisible && (
-            <Fragment>
+            <>
               <div className={classes.sectionDesktop}>
                 {isLoggedIn ? (
                   <IconButton
@@ -274,13 +274,13 @@ const MuiPrimarySearchAppBar = ({
                   <MoreIcon />
                 </IconButton>
               </div>
-            </Fragment>
+            </>
           )}
         </Toolbar>
       </AppBar>
       {isProfileVisible && renderProfileMobileMenu}
       {isProfileVisible && renderProfileMenu}
-    </Fragment>
+    </>
   );
 };
 

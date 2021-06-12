@@ -33,7 +33,6 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
     successHandler,
     isLoginSuccessful // determining if values of form control should be cleared
   );
-  const { email, password } = values;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -58,7 +57,7 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
             id="loginEmail"
             name="email"
             type="email"
-            value={email}
+            value={values.email}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"
@@ -73,7 +72,7 @@ const LoginForm = ({ successHandler, isLoginSuccessful }) => {
             id="loginPassword"
             name="password"
             type={showPassword ? "text" : "password"}
-            value={password}
+            value={values.password}
             onChange={handleChange}
             autoComplete="on"
             color="secondary"

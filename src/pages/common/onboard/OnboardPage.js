@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 // imports for MUI components
 import { MuiTabs } from "../../../components/MUI/MuiTabs";
@@ -43,7 +43,7 @@ const OnboardPage = () => {
   ];
 
   return (
-    <Fragment>
+    <>
       <header className={classes.onboardPageHeader}>
         <img src={logo} alt="upGrad Logo" className={classes.logo} />
       </header>
@@ -61,7 +61,7 @@ const OnboardPage = () => {
         )}
         {notification}
       </main>
-    </Fragment>
+    </>
   );
 };
 

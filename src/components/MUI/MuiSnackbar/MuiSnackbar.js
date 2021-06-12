@@ -20,7 +20,7 @@ const MuiSnackbar = ({ isOpen, message, handleClose }) => {
       onClose={handleClose}
       message={message}
       action={
-        <React.Fragment>
+        <>
           <IconButton
             size="small"
             aria-label="close"
@@ -29,7 +29,7 @@ const MuiSnackbar = ({ isOpen, message, handleClose }) => {
           >
             <CloseIcon fontSize="small" />
           </IconButton>
-        </React.Fragment>
+        </>
       }
     />
   );

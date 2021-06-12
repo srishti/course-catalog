@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
@@ -70,21 +70,6 @@ const AddPage = () => {
     false // determining if values of form control should be cleared
   );
 
-  const {
-    title,
-    description,
-    category,
-    author,
-    skills,
-    chapters,
-    priceInRupees,
-    priceAfterDiscount,
-    duration,
-    popularity,
-    imageURL,
-    videoURL,
-  } = values;
-
   const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
 
   const handlePublishedFilterChange = (event) => {
@@ -101,7 +86,7 @@ const AddPage = () => {
         {isLoading ? (
           loader
         ) : (
-          <Fragment>
+          <>
             <Button
               variant="contained"
               className={classes.backButton}
@@ -131,7 +116,7 @@ const AddPage = () => {
                   id="title"
                   name="title"
                   type="text"
-                  value={title}
+                  value={values.title}
                   onChange={handleChange}
                   autoComplete="on"
                   color="secondary"
@@ -146,7 +131,7 @@ const AddPage = () => {
                 multiline
                 rows={4}
                 label="Description"
-                value={description}
+                value={values.description}
                 onChange={handleChange}
                 autoComplete="on"
                 color="secondary"
@@ -164,7 +149,7 @@ const AddPage = () => {
                     id="category"
                     name="category"
                     type="text"
-                    value={category}
+                    value={values.category}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -181,7 +166,7 @@ const AddPage = () => {
                     id="author"
                     name="author"
                     type="text"
-                    value={author}
+                    value={values.author}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -199,7 +184,7 @@ const AddPage = () => {
                   id="skills"
                   name="skills"
                   type="text"
-                  value={skills}
+                  value={values.skills}
                   onChange={handleChange}
                   autoComplete="on"
                   color="secondary"
@@ -216,7 +201,7 @@ const AddPage = () => {
                   id="chapters"
                   name="chapters"
                   type="text"
-                  value={chapters}
+                  value={values.chapters}
                   onChange={handleChange}
                   autoComplete="on"
                   color="secondary"
@@ -234,7 +219,7 @@ const AddPage = () => {
                     id="priceInRupees"
                     name="priceInRupees"
                     type="text"
-                    value={priceInRupees}
+                    value={values.priceInRupees}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -253,7 +238,7 @@ const AddPage = () => {
                     id="priceAfterDiscount"
                     name="priceAfterDiscount"
                     type="text"
-                    value={priceAfterDiscount}
+                    value={values.priceAfterDiscount}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -274,7 +259,7 @@ const AddPage = () => {
                     id="duration"
                     name="duration"
                     type="text"
-                    value={duration}
+                    value={values.duration}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -291,7 +276,7 @@ const AddPage = () => {
                     id="popularity"
                     name="popularity"
                     type="text"
-                    value={popularity}
+                    value={values.popularity}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -310,7 +295,7 @@ const AddPage = () => {
                     id="imageURL"
                     name="imageURL"
                     type="text"
-                    value={imageURL}
+                    value={values.imageURL}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -327,7 +312,7 @@ const AddPage = () => {
                     id="videoURL"
                     name="videoURL"
                     type="text"
-                    value={videoURL}
+                    value={values.videoURL}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -361,7 +346,7 @@ const AddPage = () => {
                 Add
               </Button>
             </form>
-          </Fragment>
+          </>
         )}
         {notification}
       </main>
