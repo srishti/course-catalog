@@ -27,15 +27,15 @@ const Routes = () => {
           {/* User Routes */}
           <Route
             exact
-            path={routeConstants.ROUTE_URL.ONBOARD}
+            path={[
+              routeConstants.ROUTE_URL.ONBOARD,
+              routeConstants.ROUTE_URL.ROOT,
+            ]}
             component={OnboardPage}
           ></Route>
           <ProtectedRoute
             exact
-            path={[
-              routeConstants.ROUTE_URL.HOME,
-              routeConstants.ROUTE_URL.ROOT,
-            ]}
+            path={routeConstants.ROUTE_URL.HOME}
             component={HomePage}
             role={authConstants.ROLE.USER}
           ></ProtectedRoute>
