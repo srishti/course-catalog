@@ -113,9 +113,9 @@ export async function getAllPublishedCourses(successCallback, failureCallback) {
 
 /**
  * Function to get course with given id
- * @param {*} courseId - id of the course to be fetched
- * @param {*} successCallback - callback method to be called when API succeeds
- * @param {*} failureCallback - callback method to be called when API fails
+ * @param {String} courseId - id of the course to be fetched
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
  * @returns {Object} course with given ID
  */
 export async function getCourseById(
@@ -143,9 +143,9 @@ export async function getCourseById(
 
 /**
  * Function to delete a course with given id
- * @param {*} courseId - id of the course to be deleted
- * @param {*} successCallback - callback method to be called when API succeeds
- * @param {*} failureCallback - callback method to be called when API fails
+ * @param {String} courseId - id of the course to be deleted
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
  */
 export async function deleteCourse(courseId, successCallback, failureCallback) {
   try {
@@ -168,9 +168,8 @@ export async function deleteCourse(courseId, successCallback, failureCallback) {
 
 /**
  * Function to get all distinct categories of courses
- * @param {*} courseId - id of the course to be deleted
- * @param {*} successCallback - callback method to be called when API succeeds
- * @param {*} failureCallback - callback method to be called when API fails
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
  */
 export async function getAllCategories(successCallback, failureCallback) {
   try {
@@ -180,6 +179,35 @@ export async function getAllCategories(successCallback, failureCallback) {
       [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORIES],
       null,
       null,
+      apiUtils.getRequestHeaderWithToken(),
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}
+
+/**
+ * Function to create a course with given course details
+ * @param {Object} courseData - details of course to be added
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
+ */
+export async function createCourse(
+  courseData,
+  successCallback,
+  failureCallback
+) {
+  try {
+    await apiUtils.sendApiRequest(
+      apiConstants.HTTP_METHOD.POST,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
+      [apiConstants.COURSES_API_PATH_PARAMETER.ADD],
+      null,
+      courseData,
       apiUtils.getRequestHeaderWithToken(),
       successCallback,
       failureCallback

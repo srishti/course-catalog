@@ -91,15 +91,18 @@ const validateCourseForm = (values) => {
   }
 
   /*
-   Rule 18: imageURL should be a valid URL, if provided
+   Rule 18: imageURL is required
+   Rule 19: imageURL should be a valid URL
    */
-  if (values.imageURL && !utils.checkIfValidUrl(values.imageURL)) {
+  if (!values.imageURL.trim()) {
+    errors.imageURL = "Required";
+  } else if (!utils.checkIfValidUrl(values.imageURL)) {
     errors.imageURL = "Invalid image URL";
   }
 
   /*
-   Rule 19: videoURL is required
-   Rule 20: videoURL should be a valid URL
+   Rule 20: videoURL is required
+   Rule 21: videoURL should be a valid URL
    */
   if (!values.videoURL.trim()) {
     errors.videoURL = "Required";

@@ -47,6 +47,7 @@ const AddPage = () => {
   const { notification, showNotification } = useNotification();
 
   const [categories, setCategories] = useState([]);
+  const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
 
   // get all categories of courses
   useEffect(() => {
@@ -84,25 +85,50 @@ const AddPage = () => {
     popularity: "",
     imageURL: "",
     videoURL: "",
+    published: isPublishedFilterOn,
+  };
+
+  // Function to call an API for adding a new course
+  const addCourse = (values) => {
+    showLoader();
+    coursesApi.createCourse(
+      values,
+      // success callback
+      (response) => {
+        hideLoader();
+        // show the success message inside Snackbar component
+        showNotification("Added a new course successfully!");
+        // go back to the list page;
+        navigateToListPage();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        hideLoader();
+      }
+    );
+  };
+
+  const { values, errors, handleChange, handleSubmit } = useForm(
+    initialFormValues,
+    validateCourseForm,
+    addCourse,
+    false // determining if values of form control should be cleared
+  );
+
+  const handlePublishedFilterChange = (event) => {
+    setIsPublishedFilterOn(event.target.checked);
   };
 
   const navigateToListPage = () => {
     history.push({
       pathname: routeConstants.ROUTE_URL.COURSES_LIST,
     });
-  };
-
-  const { values, errors, handleChange, handleSubmit } = useForm(
-    initialFormValues,
-    validateCourseForm,
-    navigateToListPage,
-    false // determining if values of form control should be cleared
-  );
-
-  const [isPublishedFilterOn, setIsPublishedFilterOn] = useState(false);
-
-  const handlePublishedFilterChange = (event) => {
-    setIsPublishedFilterOn(event.target.checked);
   };
 
   return (

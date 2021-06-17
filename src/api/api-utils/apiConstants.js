@@ -32,4 +32,5 @@ export const COURSES_API_ROUTE = {
 export const COURSES_API_PATH_PARAMETER = {
   PUBLISHED: "published",
   CATEGORIES: "categories",
+  ADD: "add",
 };
