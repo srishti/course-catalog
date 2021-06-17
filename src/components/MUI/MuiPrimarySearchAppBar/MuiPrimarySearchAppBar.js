@@ -23,7 +23,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 // imports for custom hooks
-import { useAuth } from "../../../contexts/auth";
+import { useAuth, authConstants } from "../../../contexts/auth";
 import useLoader from "../../../hooks/useLoader";
 import useNotification from "../../../hooks/useNotification";
 
@@ -42,7 +42,7 @@ const MuiPrimarySearchAppBar = ({
   handleCategorySearch,
 }) => {
   const classes = useStyles();
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, getLoggedInUserRole } = useAuth();
   const history = useHistory();
 
   const [categoriesAnchorEl, setCategoriesAnchorEl] = useState(null);
@@ -128,6 +128,40 @@ const MuiPrimarySearchAppBar = ({
     history.push(routeConstants.ROUTE_URL.ONBOARD);
   };
 
+  const renderLogo = () => {
+    const renderLogoContent = (
+      // add cursorPointer class when the logo is clickable
+      <Typography
+        className={`${classes.logo} ${
+          isLogoClickable && classes.cursorPointer
+        }`}
+        variant="inherit"
+        component="h1"
+      >
+        upGrad
+      </Typography>
+    );
+
+    if (isLogoClickable) {
+      if (isLoggedIn && getLoggedInUserRole() === authConstants.ROLE.USER) {
+        return (
+          <Link to={routeConstants.ROUTE_URL.HOME}>{renderLogoContent}</Link>
+        );
+      } else if (
+        isLoggedIn &&
+        getLoggedInUserRole() === authConstants.ROLE.ADMIN
+      ) {
+        return (
+          <Link to={routeConstants.ROUTE_URL.COURSES_LIST}>
+            {renderLogoContent}
+          </Link>
+        );
+      }
+    } else {
+      return renderLogoContent;
+    }
+  };
+
   // visible as categories menu
   const categoriesMenuId = "categories-menu";
   const renderCategoriesMenu = (
@@ -202,23 +236,13 @@ const MuiPrimarySearchAppBar = ({
     </Menu>
   );
 
-  const renderLogo = (
-    // add cursorPointer class when the logo is clickable
-    <Typography
-      className={`${classes.logo} ${isLogoClickable && classes.cursorPointer}`}
-      variant="inherit"
-      component="h1"
-    >
-      upGrad
-    </Typography>
-  );
-
   return (
     <>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           {/* upGrad Logo */}
-          {isLogoClickable ? <Link to="/">{renderLogo}</Link> : renderLogo}
+
+          {renderLogo()}
 
           {/* Search Bar */}
           {isSearchVisible && (
