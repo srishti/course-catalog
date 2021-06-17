@@ -86,40 +86,18 @@ const HomePage = () => {
     history.push(routeUtils.getDetailsPageRouteUrl(courseId)); // redirect to course details page on click of course card
   };
 
-  // TODO: API pending; get all new courses instead of published courses
-  // get all NEW courses
-  useEffect(() => {
-    showLoader();
-    coursesApi.getAllPublishedCourses(
-      // success callback
-      (response) => {
-        const nNewCourses = response.data.slice(
-          0,
-          constants.SHOW_NEW_COURSES_LIMIT
-        );
-        setNewCoursesList(nNewCourses);
-        hideLoader();
-      },
-      // failure callback
-      (error, errorMessage) => {
-        // show errors from specific to generic
-        if (errorMessage) {
-          showNotification(errorMessage);
-        } else {
-          showNotification(error.toString());
-        }
-        hideLoader();
-      }
-    );
-  }, []);
-
-  // get all published courses
+  // get all published courses for New Courses section and Main Courses section
   useEffect(() => {
     showLoader();
     coursesApi.getAllPublishedCourses(
       // success callback
       (response) => {
         setCoursesList(response.data);
+        const nNewCourses = response.data.slice(
+          0,
+          constants.SHOW_NEW_COURSES_LIMIT
+        );
+        setNewCoursesList(nNewCourses);
         hideLoader();
       },
       // failure callback
