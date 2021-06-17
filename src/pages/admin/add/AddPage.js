@@ -66,10 +66,16 @@ const AddPage = () => {
         } else {
           showNotification(error.toString());
         }
-        // hideLoader();
+        hideLoader();
       }
     );
   }, []);
+
+  const navigateToListPage = () => {
+    history.push({
+      pathname: routeConstants.ROUTE_URL.COURSES_LIST,
+    });
+  };
 
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
@@ -89,7 +95,7 @@ const AddPage = () => {
   };
 
   // Function to call an API for adding a new course
-  const addCourse = (values) => {
+  const addCourse = () => {
     showLoader();
     coursesApi.createCourse(
       values,
@@ -123,12 +129,6 @@ const AddPage = () => {
 
   const handlePublishedFilterChange = (event) => {
     setIsPublishedFilterOn(event.target.checked);
-  };
-
-  const navigateToListPage = () => {
-    history.push({
-      pathname: routeConstants.ROUTE_URL.COURSES_LIST,
-    });
   };
 
   return (

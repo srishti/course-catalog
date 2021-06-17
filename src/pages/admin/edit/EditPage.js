@@ -52,7 +52,24 @@ const EditPage = (props) => {
     });
   };
 
-  const [courseDetails, setCourseDetails] = useState({});
+  const initialFormValues = {
+    // the keys are similar to `name` attribute provided to form controls
+    title: "",
+    description: "",
+    category: "",
+    author: "",
+    skills: "",
+    chapters: "",
+    duration: "",
+    priceInRupees: "",
+    priceAfterDiscount: "",
+    popularity: "",
+    imageURL: "",
+    videoURL: "",
+    published: false,
+  };
+
+  const [courseDetails, setCourseDetails] = useState(initialFormValues);
   const [categories, setCategories] = useState([]);
 
   // get all data of course with given id
@@ -96,21 +113,45 @@ const EditPage = (props) => {
         } else {
           showNotification(error.toString());
         }
-        // hideLoader();
+        hideLoader();
       }
     );
   }, []);
 
+  // Function to call an API for adding a new course
+  const editCourse = () => {
+    showLoader();
+    const courseId = props.match.params.id;
+    coursesApi.updateCourse(
+      courseId,
+      values,
+      // success callback
+      (response) => {
+        hideLoader();
+        // show the success message inside Snackbar component
+        showNotification("Updated course successfully!");
+        // go back to the list page
+        navigateToListPage();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        hideLoader();
+      }
+    );
+  };
+
   const { values, errors, handleChange, handleSubmit } = useForm(
     courseDetails,
     validateCourseForm,
-    navigateToListPage,
+    editCourse,
     false // determining if values of form control should be cleared
   );
-
-  useEffect(() => {
-    setCourseDetails(values);
-  }, [values]);
 
   const handlePublishedFilterChange = (event) => {
     setCourseDetails({ ...courseDetails, published: event.target.checked });
@@ -158,6 +199,7 @@ const EditPage = (props) => {
                   type="text"
                   value={values.title}
                   onChange={handleChange}
+                  placeholder={courseDetails.title}
                   autoComplete="on"
                   color="secondary"
                 />
@@ -172,6 +214,7 @@ const EditPage = (props) => {
                 rows={4}
                 label="Description"
                 value={values.description}
+                placeholder={courseDetails.description}
                 onChange={handleChange}
                 autoComplete="on"
                 color="secondary"
@@ -212,6 +255,7 @@ const EditPage = (props) => {
                     name="author"
                     type="text"
                     value={values.author}
+                    placeholder={courseDetails.author}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -230,6 +274,7 @@ const EditPage = (props) => {
                   name="skills"
                   type="text"
                   value={values.skills}
+                  placeholder={courseDetails.skills.toString()}
                   onChange={handleChange}
                   autoComplete="on"
                   color="secondary"
@@ -247,6 +292,7 @@ const EditPage = (props) => {
                   name="chapters"
                   type="text"
                   value={values.chapters}
+                  placeholder={courseDetails.chapters.toString()}
                   onChange={handleChange}
                   autoComplete="on"
                   color="secondary"
@@ -265,6 +311,7 @@ const EditPage = (props) => {
                     name="priceInRupees"
                     type="text"
                     value={values.priceInRupees}
+                    placeholder={courseDetails.priceInRupees.toString()}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -284,6 +331,7 @@ const EditPage = (props) => {
                     name="priceAfterDiscount"
                     type="text"
                     value={values.priceAfterDiscount}
+                    placeholder={courseDetails.priceAfterDiscount.toString()}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -305,6 +353,7 @@ const EditPage = (props) => {
                     name="duration"
                     type="text"
                     value={values.duration}
+                    placeholder={courseDetails.duration.toString()}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -322,6 +371,7 @@ const EditPage = (props) => {
                     name="popularity"
                     type="text"
                     value={values.popularity}
+                    placeholder={courseDetails.popularity.toString()}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -341,6 +391,7 @@ const EditPage = (props) => {
                     name="imageURL"
                     type="text"
                     value={values.imageURL}
+                    placeholder={courseDetails.imageURL}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
@@ -358,6 +409,7 @@ const EditPage = (props) => {
                     name="videoURL"
                     type="text"
                     value={values.videoURL}
+                    placeholder={courseDetails.videoURL}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"

@@ -42,6 +42,7 @@ const validateCourseForm = (values) => {
    Rule 6: priceInRupees is required
    Rule 7: priceInRupees should be a numerical value (integer or decimal)
    Rule 8: priceInRupees cannot be negative
+   Rule 9: priceInRupees cannot be more than INR 30000
    */
   if (!values.priceInRupees.trim()) {
     errors.priceInRupees = "Required";
@@ -49,25 +50,32 @@ const validateCourseForm = (values) => {
     errors.priceInRupees = "Price should be numerical";
   } else if (values.priceInRupees < 0) {
     errors.priceInRupees = "Price cannot be negative";
+  } else if (values.priceInRupees > 30000) {
+    errors.priceInRupees = "Price cannot be more than INR 30000";
   }
 
   /*
-   Rule 9: priceAfterDiscount is required
-   Rule 10: priceAfterDiscount should be a numerical value (integer or decimal)
-   Rule 11: priceAfterDiscount cannot be negative
+   Rule 10: priceAfterDiscount is required
+   Rule 11: priceAfterDiscount should be a numerical value (integer or decimal)
+   Rule 12: priceAfterDiscount cannot be negative
+   Rule 13: priceAfterDiscount cannot be more than INR 30000
    */
   if (!values.priceAfterDiscount.trim()) {
     errors.priceAfterDiscount = "Required";
   } else if (!utils.checkIfValueIsNumerical(values.priceAfterDiscount)) {
-    errors.priceAfterDiscount = "Price should be numerical";
+    errors.priceAfterDiscount = "Discounted price should be numerical";
   } else if (values.priceAfterDiscount < 0) {
-    errors.priceAfterDiscount = "Price cannot be negative";
+    errors.priceAfterDiscount = "Discounted price cannot be negative";
+  } else if (values.priceAfterDiscount > 30000) {
+    errors.priceAfterDiscount =
+      "Discounted price cannot be more than INR 30000";
   }
 
   /*
-   Rule 12: duration is required
-   Rule 13: duration should be an integer value
-   Rule 14: duration cannot be negative
+   Rule 14: duration is required
+   Rule 15: duration should be an integer value
+   Rule 16: duration cannot be negative
+   Rule 17: duration cannot be more than 1200 minutes
    */
   if (!values.duration.trim()) {
     errors.duration = "Required";
@@ -75,12 +83,14 @@ const validateCourseForm = (values) => {
     errors.duration = "Duration should contain only digits";
   } else if (values.duration < 0) {
     errors.duration = "Duration cannot be negative";
+  } else if (values.duration > 1200) {
+    errors.duration = "Duration cannot be more than 1200 minutes";
   }
 
   /*
-   Rule 15: popularity is required
-   Rule 16: popularity should be a numerical value (integer or decimal)
-   Rule 17: popularity cannot be negative
+   Rule 18: popularity is required
+   Rule 19: popularity should be a numerical value (integer or decimal)
+   Rule 20: popularity cannot be negative
    */
   if (!values.popularity.trim()) {
     errors.popularity = "Required";
@@ -91,8 +101,8 @@ const validateCourseForm = (values) => {
   }
 
   /*
-   Rule 18: imageURL is required
-   Rule 19: imageURL should be a valid URL
+   Rule 21: imageURL is required
+   Rule 22: imageURL should be a valid URL
    */
   if (!values.imageURL.trim()) {
     errors.imageURL = "Required";
@@ -101,8 +111,8 @@ const validateCourseForm = (values) => {
   }
 
   /*
-   Rule 20: videoURL is required
-   Rule 21: videoURL should be a valid URL
+   Rule 23: videoURL is required
+   Rule 24: videoURL should be a valid URL
    */
   if (!values.videoURL.trim()) {
     errors.videoURL = "Required";

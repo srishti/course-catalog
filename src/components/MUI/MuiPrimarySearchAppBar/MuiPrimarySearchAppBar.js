@@ -82,7 +82,7 @@ const MuiPrimarySearchAppBar = ({
         } else {
           showNotification(error.toString());
         }
-        // hideLoader();
+        hideLoader();
       }
     );
   }, []);

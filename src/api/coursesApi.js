@@ -218,3 +218,34 @@ export async function createCourse(
     }
   }
 }
+
+/**
+ * Function to update a given course with provided new details to replace the old details
+ * @param {String} courseId - id of the course to be updated
+ * @param {Object} courseUpdatedData - new details of the course to be updated
+ * @param {Function} successCallback - callback method to be called when API succeeds
+ * @param {Function} failureCallback - callback method to be called when API fails
+ */
+export async function updateCourse(
+  courseId,
+  courseUpdatedData,
+  successCallback,
+  failureCallback
+) {
+  try {
+    await apiUtils.sendApiRequest(
+      apiConstants.HTTP_METHOD.PUT,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
+      [courseId],
+      { id: courseId },
+      courseUpdatedData,
+      apiUtils.getRequestHeaderWithToken(),
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}
