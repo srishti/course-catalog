@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // imports for 3rd party libraries
 import { useHistory } from "react-router-dom";
@@ -15,6 +15,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FilledInput from "@material-ui/core/FilledInput";
 import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
@@ -29,6 +31,9 @@ import validateCourseForm from "../validateCourseForm";
 import useLoader from "../../../hooks/useLoader";
 import useNotification from "../../../hooks/useNotification";
 
+// imports for APIs
+import * as coursesApi from "../../../api/coursesApi";
+
 // imports for styles
 import classes from "../Course.module.css";
 import { useStyles } from "../../../styles/formStyles";
@@ -38,8 +43,32 @@ const AddPage = () => {
   const cssClasses = { ...classes, ...useStyles() };
 
   const history = useHistory();
-  const { loader, isLoading } = useLoader();
-  const { notification } = useNotification();
+  const { loader, isLoading, showLoader, hideLoader } = useLoader();
+  const { notification, showNotification } = useNotification();
+
+  const [categories, setCategories] = useState([]);
+
+  // get all categories of courses
+  useEffect(() => {
+    showLoader();
+    coursesApi.getAllCategories(
+      // success callback
+      (response) => {
+        setCategories(response.data);
+        hideLoader();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        // hideLoader();
+      }
+    );
+  }, []);
 
   const initialFormValues = {
     // the keys are similar to `name` attribute provided to form controls
@@ -141,19 +170,24 @@ const AddPage = () => {
                 <div className={cssClasses.error}>{errors.description}</div>
               )}
               <div className={cssClasses.controlsGroup}>
-                <FormControl variant="filled">
+                <FormControl variant="filled" className={classes.formControl}>
                   <InputLabel htmlFor="category" color="secondary">
                     Category
                   </InputLabel>
-                  <FilledInput
+                  <Select
                     id="category"
                     name="category"
-                    type="text"
                     value={values.category}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
-                  />
+                  >
+                    {categories.map((category, index) => (
+                      <MenuItem value={category} key={index}>
+                        {category}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   {errors.category && (
                     <div className={cssClasses.error}>{errors.category}</div>
                   )}

@@ -15,6 +15,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FilledInput from "@material-ui/core/FilledInput";
 import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
@@ -51,6 +53,7 @@ const EditPage = (props) => {
   };
 
   const [courseDetails, setCourseDetails] = useState({});
+  const [categories, setCategories] = useState([]);
 
   // get all data of course with given id
   useEffect(() => {
@@ -72,6 +75,28 @@ const EditPage = (props) => {
           showNotification(error.toString());
         }
         hideLoader();
+      }
+    );
+  }, []);
+
+  // get all categories of courses
+  useEffect(() => {
+    showLoader();
+    coursesApi.getAllCategories(
+      // success callback
+      (response) => {
+        setCategories(response.data);
+        hideLoader();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        // hideLoader();
       }
     );
   }, []);
@@ -156,19 +181,24 @@ const EditPage = (props) => {
                 <div className={cssClasses.error}>{errors.description}</div>
               )}
               <div className={cssClasses.controlsGroup}>
-                <FormControl variant="filled">
+                <FormControl variant="filled" className={classes.formControl}>
                   <InputLabel htmlFor="category" color="secondary">
                     Category
                   </InputLabel>
-                  <FilledInput
+                  <Select
                     id="category"
                     name="category"
-                    type="text"
                     value={values.category}
                     onChange={handleChange}
                     autoComplete="on"
                     color="secondary"
-                  />
+                  >
+                    {categories.map((category, index) => (
+                      <MenuItem value={category} key={index}>
+                        {category}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   {errors.category && (
                     <div className={cssClasses.error}>{errors.category}</div>
                   )}
