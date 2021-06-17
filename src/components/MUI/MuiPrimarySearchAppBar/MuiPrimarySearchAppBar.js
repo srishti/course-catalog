@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // imports for 3rd party libraries
 import { Link, useHistory } from "react-router-dom";
@@ -24,6 +24,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 // imports for custom hooks
 import { useAuth } from "../../../contexts/auth";
+import useLoader from "../../../hooks/useLoader";
+import useNotification from "../../../hooks/useNotification";
+
+// imports for APIs
+import * as coursesApi from "../../../api/coursesApi";
 
 // imports for styles
 import { useStyles } from "./styles";
@@ -45,6 +50,7 @@ const MuiPrimarySearchAppBar = ({
   const [profileMobileAnchorEl, setProfileForMobileAnchorEl] = useState(null);
 
   const [searchInputText, setSearchInputText] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const isCategoriesMenuOpen = Boolean(categoriesAnchorEl);
   const isProfileMenuOpen = Boolean(profileAnchorEl);
@@ -55,6 +61,31 @@ const MuiPrimarySearchAppBar = ({
   isSearchVisible = isSearchVisible || false;
   isCategoriesVisible = isCategoriesVisible || false;
   isProfileVisible = isProfileVisible || false;
+
+  const { loader, isLoading, showLoader, hideLoader } = useLoader();
+  const { notification, showNotification } = useNotification();
+
+  // get all categories of courses
+  useEffect(() => {
+    showLoader();
+    coursesApi.getAllCategories(
+      // success callback
+      (response) => {
+        setCategories(response.data);
+        hideLoader();
+      },
+      // failure callback
+      (error, errorMessage) => {
+        // show errors from specific to generic
+        if (errorMessage) {
+          showNotification(errorMessage);
+        } else {
+          showNotification(error.toString());
+        }
+        // hideLoader();
+      }
+    );
+  }, []);
 
   const handleCategoriesMenuOpen = (event) => {
     setCategoriesAnchorEl(event.currentTarget);
@@ -88,10 +119,8 @@ const MuiPrimarySearchAppBar = ({
     handleTitleSearch(searchInputText);
   };
 
-  const handleCategoryClick = (event) => {
-    /* TODO: API pending; replace innerText with data fetched from server */
-    const category = event.target.innerText;
-    handleCategorySearch(category);
+  const handleCategoryClick = (categoryName) => {
+    handleCategorySearch(categoryName);
     handleCategoriesMenuClose();
   };
 
@@ -112,16 +141,19 @@ const MuiPrimarySearchAppBar = ({
       onClose={handleCategoriesMenuClose}
       className={classes.root}
     >
-      {/* TODO: API pending; fetch categories data from server */}
-      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
-        Frontend Development
-      </MenuItem>
-      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
-        Backend Development
-      </MenuItem>
-      <MenuItem onClick={handleCategoryClick} className={classes.menuItem}>
-        DevOps
-      </MenuItem>
+      {isLoading ? (
+        <MenuItem className={classes.loaderMenuItem}>{loader}</MenuItem>
+      ) : (
+        categories.map((category, index) => (
+          <MenuItem
+            onClick={() => handleCategoryClick(category)}
+            className={classes.menuItem}
+            key={index}
+          >
+            {category}
+          </MenuItem>
+        ))
+      )}
     </Menu>
   );
 
@@ -276,6 +308,7 @@ const MuiPrimarySearchAppBar = ({
               </div>
             </>
           )}
+          {notification}
         </Toolbar>
       </AppBar>
       {isProfileVisible && renderProfileMobileMenu}

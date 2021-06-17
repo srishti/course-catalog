@@ -85,6 +85,10 @@ const useStyles = makeStyles((theme) => ({
       color: "inherit",
     },
   },
+  loaderMenuItem: {
+    padding: theme.spacing(3),
+    height: "4rem",
+  },
   menuItem: {
     "&:not(:first-child)": {
       borderTop: "1px solid var(--clr-grey-light)",

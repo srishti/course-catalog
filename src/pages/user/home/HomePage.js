@@ -60,10 +60,10 @@ const HomePage = () => {
     );
   };
 
-  const handleCategorySearch = (category) => {
+  const handleCategorySearch = (categoryName) => {
     showLoader();
     coursesApi.getCoursesByCategory(
-      category,
+      categoryName,
       // success callback
       (response) => {
         setCoursesList(response.data);

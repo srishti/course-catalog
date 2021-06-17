@@ -33,13 +33,13 @@ export async function searchCourseByTitle(
 
 /**
  * Function to get all courses within a given category
- * @param {String} category - category string corresponding to which courses are to be fetched
+ * @param {String} categoryName - category string corresponding to which courses are to be fetched
  * @param {Function} successCallback - callback method to be called when API succeeds
  * @param {Function} failureCallback - callback method to be called when API fails
  * @returns {Array} array of courses which belong to the given category (each course is an object consisting of course details)
  */
 export async function getCoursesByCategory(
-  category,
+  categoryName,
   successCallback,
   failureCallback
 ) {
@@ -47,8 +47,8 @@ export async function getCoursesByCategory(
     await apiUtils.sendApiRequest(
       apiConstants.HTTP_METHOD.GET,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
-      [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORY],
-      { category: category },
+      [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORIES, categoryName],
+      null,
       null,
       apiUtils.getRequestHeaderWithToken(),
       successCallback,
@@ -153,6 +153,31 @@ export async function deleteCourse(courseId, successCallback, failureCallback) {
       apiConstants.HTTP_METHOD.DELETE,
       apiConstants.COURSES_API_ROUTE.TUTORIALS,
       [courseId],
+      null,
+      null,
+      apiUtils.getRequestHeaderWithToken(),
+      successCallback,
+      failureCallback
+    );
+  } catch (error) {
+    if (failureCallback) {
+      failureCallback(error);
+    }
+  }
+}
+
+/**
+ * Function to get all distinct categories of courses
+ * @param {*} courseId - id of the course to be deleted
+ * @param {*} successCallback - callback method to be called when API succeeds
+ * @param {*} failureCallback - callback method to be called when API fails
+ */
+export async function getAllCategories(successCallback, failureCallback) {
+  try {
+    await apiUtils.sendApiRequest(
+      apiConstants.HTTP_METHOD.GET,
+      apiConstants.COURSES_API_ROUTE.TUTORIALS,
+      [apiConstants.COURSES_API_PATH_PARAMETER.CATEGORIES],
       null,
       null,
       apiUtils.getRequestHeaderWithToken(),
