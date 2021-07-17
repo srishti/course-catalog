@@ -32,7 +32,7 @@ Course Catalog application lets a _user_ browse different online courses, view t
 
 1. Run the backend code corresponding to this application.\
    (Contact your program's Point of Contact from the upGrad team to get the backend code.)
-2. Clone the [repository](https://github.com/srishti/course-catalog-frontend)\* using Git on your machine. Alternatively, download the `.zip` file of current repository on your machine and then unzip the downloaded zipped file.
+2. Fork the [repository](https://github.com/srishti/course-catalog-frontend)\* to your GitHub account. 
 3. Go inside the application's directory on your local machine.
 4. Install all packages using the following command:\
    `npm i`
